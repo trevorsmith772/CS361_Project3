@@ -8,10 +8,11 @@ import fa.nfa.NFAState;
 public class RE implements REInterface {
 
     private String regEx;
-    private int count;
+    private int stateCount;
 
     public RE(String regEx) {
         this.regEx = regEx;
+        stateCount = 0;
     }
 
     @Override
@@ -90,4 +91,66 @@ public class RE implements REInterface {
 		return factor;
 	}
 
+    public NFA repetition(NFA base){
+		NFAState nfaState = (NFAState) base.getStartState();
+		for(State nfa : base.getFinalStates()){
+			base.addTransition(nfa.getName(), 'e', nfaState.getName());
+		}
+
+		String state = Integer.toString(stateCount++);
+		base.addStartState(state);
+		base.addFinalState(state);
+		base.addTransition(state, 'e', nfaState.getName());
+		return base;
+	}
+
+    public NFA primitive(char c){
+		NFA nfa = new NFA();
+
+		String startState = Integer.toString(stateCount++);
+		nfa.addStartState(startState);
+
+		String finalState = Integer.toString(stateCount++);
+		nfa.addFinalState(finalState);
+
+		nfa.addTransition(startState, c, finalState);
+
+		return nfa;
+	}
+
+    public NFA concatenate(NFA nfa,NFA nfa2){
+		//System.out.println("concat");
+		nfa.addAbc(nfa2.getABC());
+		for(State s:nfa.getFinalStates()){
+			NFAState state = (NFAState)s;
+			state.setNonFinal();
+			state.addTransition( 'e', (NFAState)nfa2.getStartState());
+		}
+		nfa.addNFAStates(nfa2.getStates());
+		return nfa;
+	}
+
+    public NFA union(NFA nfa, NFA nfa2){
+		//System.out.println("union");
+		NFAState nfaState = (NFAState) nfa.getStartState();
+		NFAState nfaState2 = (NFAState) nfa2.getStartState();
+
+		nfa.addNFAStates(nfa2.getStates());
+		nfa.addAbc(nfa2.getABC());
+
+		String startState = Integer.toString(stateCount++);
+		nfa.addStartState(startState);
+		String finalState = Integer.toString(stateCount++);
+		nfa.addFinalState(finalState);
+
+		nfa.addTransition(startState, 'e', nfaState.getName());
+		nfa.addTransition(startState, 'e', nfaState2.getName());  
+
+		for(State s:nfa2.getFinalStates()){
+			NFAState state = (NFAState)s;
+			state.setNonFinal();
+			nfa.addTransition(state.getName(), 'e', finalState);
+		}
+		return nfa; 
+	}
 }
