@@ -19,8 +19,33 @@ public class RE implements REInterface {
         return regex();
     }
 
+	private NFA base() {
+		switch (peek()) {
+		case '(':
+			eat('(');
+			NFA nfa = regex();
+			eat(')');
+			return nfa;
 
+		default:
+			return primitive(next());
+		}
+	}
 
+    private NFA factor() {
+		NFA base = base() ;
+		while (more() && peek() == '*') {
+			eat('*') ;
+			base =  repetition(base) ;
+		}
+		return base ;
+	}
+
+	private char next() {
+		char c = peek();
+		eat(c);
+		return c;
+	}
 
     private NFA regex() {
         NFA term = term();
@@ -49,8 +74,20 @@ public class RE implements REInterface {
         }
     }
 
+	private NFA term() {
+		NFA factor = new NFA(); 
+		
+		factor.addStartState(Integer.toString(stateCount++));
+		String finalstate = Integer.toString(stateCount);
+		factor.addFinalState(Integer.toString(stateCount++));
+		factor.addTransition(factor.getStartState().getName(), 'e', finalstate);
 
+		while (more() && peek() != ')' && peek() != '|') {
+			NFA nextFactor = factor();
+			factor = concatenate(factor, nextFactor); // factor = new Sequence(factor,nextFactor) ;
+		}
 
-
+		return factor;
+	}
 
 }
