@@ -30,9 +30,12 @@ public class RE implements REInterface {
         return regEx.charAt(0);
     }
 
-	/*
+
+
+
+	/**
 	 * Consumes the next item of input, failing if not equal to item
-	 * @param char
+	 * @param c next character getting compared in the regular expression
 	 */
     private void eat(char c) {
         if (peek() == c) {
