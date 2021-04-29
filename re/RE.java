@@ -21,10 +21,19 @@ public class RE implements REInterface {
 
     /* Recursive Descent Methods */
 
+
+	/*
+	 * Returns the next item of input without consuming it
+	 * @return char
+	 */
     private char peek() {
         return regEx.charAt(0);
     }
 
+	/*
+	 * Consumes the next item of input, failing if not equal to item
+	 * @param char
+	 */
     private void eat(char c) {
         if (peek() == c) {
             regEx = regEx.substring(1);
@@ -44,6 +53,7 @@ public class RE implements REInterface {
     }
 
     /* Regular Expression Parsing Methods */
+
 
     private NFA regex() {
         NFA term = term();
