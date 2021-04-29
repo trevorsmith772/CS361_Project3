@@ -22,9 +22,11 @@ public class RE implements REInterface {
     /* Recursive Descent Methods */
 
 
-	/*
+
+
+	/**
 	 * Returns the next item of input without consuming it
-	 * @return char
+	 * @return char next item of input
 	 */
     private char peek() {
         return regEx.charAt(0);
@@ -45,13 +47,21 @@ public class RE implements REInterface {
         }
     }
 
-    private char next() {
+	/**
+	 * Returns the next item of input and consumes it
+	 * @return c next item of input being consumed
+	 */
+	private char next() {
         char c = peek();
         eat(c);
         return c;
     }
 
-    private boolean more() {
+	/**
+	 * Checks if there are any more characters in the expression
+	 * @return boolean if the length is greater than 0
+	 */
+	private boolean more() {
         return regEx.length() > 0;
     }
 
