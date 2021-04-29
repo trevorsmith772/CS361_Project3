@@ -1,4 +1,4 @@
-# Project 2: Nondeterministic Finite Automata
+# Project 3: Regular Expressions
 
 * Author: Trevor Smith, Brandon Mattaini, Berto Cisneros
 * Class: CS 361, Section 1 (Trevor & Berto), Section 2 (Brandon)
@@ -7,18 +7,17 @@
 
 ## Overview
 
-This program is an implementation of a Nondeterministic finite automaton. The program takes in a file and reads the states, alphabet, and transitions, and determines whether specific input strings are valid or not.
-Additionally, this program computes an equivalent DFA to a NFA’s instance.
+This program is an implementation of a regular expression to NFA converter. This program creates an NFA from the given regular expression and evaluates whether the given strings are accepted or not.
 
 ## Compiling and Using
 
 In order to compile this program, make sure you are in the parent directory containing this README file. Once you are at this directory, run the command shown below to compile the whole package:
 
-javac fa/nfa/NFADriver.java
+javac -cp ".:./CS361FA.jar" re/REDriver.java
 
 Then to run the program, run the following command, where <input file> is the file (and filepath) that the program will run.
 
-java fa.nfa.NFADriver <input file>
+java -cp ".:./CS361FA.jar" re.REDriver <input file>
 
 
 ## Discussion
