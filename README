@@ -36,4 +36,4 @@ Overall though, we thought this project wasn't as bad as we were expecting, but 
 
 ## Testing
 
-For testing this project, we compiled and ran the NFADriver class with the 4 given test files to be able to compare our results. We didn't add anymore tests this time, as we felt fairly confident that the given tests covered most cases. If we were to change one thing in our development process, it would have been to do more testing on smaller methods to ensure they were working correctly.
+For testing this project, we compiled and ran the REDriver class with the 3 given test files to be able to compare our results. We didn't add anymore tests this time, as we felt fairly confident that the given tests covered most cases. If we were to change one thing in our development process, it would have been to do more testing on smaller methods to ensure they were working correctly.
