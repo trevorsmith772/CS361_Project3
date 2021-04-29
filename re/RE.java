@@ -71,7 +71,7 @@ public class RE implements REInterface {
 
 	/**
 	 * Parser for regular expression to form terms
-	 * @return NFA returns an NFA as a new term with or withour a union
+	 * @return NFA returns an NFA as a new term with or without a union
 	 */
     private NFA regex() {
         NFA term = term();
@@ -103,7 +103,11 @@ public class RE implements REInterface {
         return factor;
     }
 
-    private NFA factor() {
+	/**
+	 * Parsing a base and Kleene stars
+	 * @return NFA returns a base
+	 */
+	private NFA factor() {
         NFA base = base();
         while (more() && peek() == '*') {
             eat('*');
@@ -112,7 +116,11 @@ public class RE implements REInterface {
         return base;
     }
 
-    private NFA base() {
+	/**
+	 * Check for parentheses, otherwise returns next primitive
+	 * @return NFA from given symbol
+	 */
+	private NFA base() {
         switch (peek()) {
         case '(':
             eat('(');
