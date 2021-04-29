@@ -90,9 +90,11 @@ public class RE implements REInterface {
 	private NFA term() {
         NFA factor = new NFA();
 
-        factor.addStartState(Integer.toString(numStates++));
+        factor.addStartState(Integer.toString(numStates));
+        numStates++;
         String finalstate = Integer.toString(numStates);
-        factor.addFinalState(Integer.toString(numStates++));
+        factor.addFinalState(Integer.toString(numStates));
+        numStates++;
         factor.addTransition(factor.getStartState().getName(), 'e', finalstate);
 
         while (more() && peek() != ')' && peek() != '|') {
@@ -141,7 +143,8 @@ public class RE implements REInterface {
             base.addTransition(nfa.getName(), 'e', nfaState.getName());
         }
 
-        String state = Integer.toString(numStates++);
+        String state = Integer.toString(numStates);
+        numStates++;
         base.addStartState(state);
         base.addFinalState(state);
         base.addTransition(state, 'e', nfaState.getName());
@@ -157,10 +160,12 @@ public class RE implements REInterface {
     public NFA primitive(char c) {
         NFA nfa = new NFA();
 
-        String startState = Integer.toString(numStates++);
+        String startState = Integer.toString(numStates);
+        numStates++;
         nfa.addStartState(startState);
 
-        String finalState = Integer.toString(numStates++);
+        String finalState = Integer.toString(numStates);
+        numStates++;
         nfa.addFinalState(finalState);
 
         nfa.addTransition(startState, c, finalState);
@@ -199,9 +204,11 @@ public class RE implements REInterface {
         nfa.addNFAStates(nfa2.getStates());
         nfa.addAbc(nfa2.getABC());
 
-        String startState = Integer.toString(numStates++);
+        String startState = Integer.toString(numStates);
+        numStates++;
         nfa.addStartState(startState);
-        String finalState = Integer.toString(numStates++);
+        String finalState = Integer.toString(numStates);
+        numStates++;
         nfa.addFinalState(finalState);
 
         nfa.addTransition(startState, 'e', nfaState.getName());
