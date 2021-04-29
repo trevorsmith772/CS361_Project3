@@ -4,12 +4,25 @@ import fa.State;
 import fa.nfa.NFA;
 import fa.nfa.NFAState;
 
+/**
+ * This class is used to create an NFA from a given
+ * regular expression. This class uses recursive descent 
+ * parsing and other recursive programming concepts.
+ * 
+ * @author Trevor Smith (trevorsmith772)
+ * @author Roberto Cisneros (bertocisneros)
+ * @author Brandon Mattaini (brandonmattaini)
+ * Date: April 29, 2021
+ */
 public class RE implements REInterface {
 
-    private String regEx;
+    private String regEx; //Regular expression string
     private int numStates;
 
-
+    /**
+     * Constructor
+     * @param regEx Regular expression string
+     */
     public RE(String regEx) {
         this.regEx = regEx;
         numStates = 0;
@@ -20,10 +33,8 @@ public class RE implements REInterface {
         return regex();
     }
 
+
     /* Recursive Descent Methods */
-
-
-
 
 	/**
 	 * Returns the next item of input without consuming it
@@ -33,9 +44,6 @@ public class RE implements REInterface {
         return regEx.charAt(0);
     }
 
-
-
-
 	/**
 	 * Consumes the next item of input, failing if not equal to item
 	 * @param c next character getting compared in the regular expression
@@ -43,7 +51,7 @@ public class RE implements REInterface {
     private void eat(char c) {
         if (peek() == c) {
             regEx = regEx.substring(1);
-        } else {
+        } else {    //wrong character expected/retrieved
             throw new RuntimeException("Expected: " + c + "; got: " + peek());
         }
     }
@@ -66,11 +74,12 @@ public class RE implements REInterface {
         return regEx.length() > 0;
     }
 
+
     /* Regular Expression Parsing Methods */
 
-
 	/**
-	 * Parser for regular expression to form terms
+	 * Parser for regular expression to form terms, using recursion
+     * 
 	 * @return NFA returns an NFA as a new term with or without a union
 	 */
     private NFA regex() {
@@ -85,11 +94,11 @@ public class RE implements REInterface {
 
 	/**
 	 * Checks if it has reached the boundary of a term or end of input
+     * 
 	 * @return NFA creates an NFA unioned from a single term
 	 */
 	private NFA term() {
         NFA factor = new NFA();
-
         factor.addStartState(Integer.toString(numStates));
         numStates++;
         String finalstate = Integer.toString(numStates);
@@ -137,6 +146,12 @@ public class RE implements REInterface {
 
     /* Additional Helper Methods */
 
+    /**
+     * Returns NFA if an or character is found
+     * 
+     * @param base - input NFA
+     * @return the altered base NFA
+     */
     public NFA repetition(NFA base) {
         NFAState nfaState = (NFAState) base.getStartState();
         for (State nfa : base.getFinalStates()) {
