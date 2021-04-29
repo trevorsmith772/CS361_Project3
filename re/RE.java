@@ -69,6 +69,10 @@ public class RE implements REInterface {
     /* Regular Expression Parsing Methods */
 
 
+	/**
+	 * Parser for regular expression to form terms
+	 * @return NFA returns an NFA as a new term with or withour a union
+	 */
     private NFA regex() {
         NFA term = term();
         if (more() && peek() == '|') {
@@ -79,7 +83,11 @@ public class RE implements REInterface {
         }
     }
 
-    private NFA term() {
+	/**
+	 * Checks if it has reached the boundary of a term or end of input
+	 * @return NFA creates an NFA unioned from a single term
+	 */
+	private NFA term() {
         NFA factor = new NFA();
 
         factor.addStartState(Integer.toString(stateCount++));
