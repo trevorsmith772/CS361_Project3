@@ -7,12 +7,12 @@ import fa.nfa.NFAState;
 public class RE implements REInterface {
 
     private String regEx;
-    private int stateCount;
+    private int numStates;
 
 
     public RE(String regEx) {
         this.regEx = regEx;
-        stateCount = 0;
+        numStates = 0;
     }
 
     @Override
@@ -90,9 +90,9 @@ public class RE implements REInterface {
 	private NFA term() {
         NFA factor = new NFA();
 
-        factor.addStartState(Integer.toString(stateCount++));
-        String finalstate = Integer.toString(stateCount);
-        factor.addFinalState(Integer.toString(stateCount++));
+        factor.addStartState(Integer.toString(numStates++));
+        String finalstate = Integer.toString(numStates);
+        factor.addFinalState(Integer.toString(numStates++));
         factor.addTransition(factor.getStartState().getName(), 'e', finalstate);
 
         while (more() && peek() != ')' && peek() != '|') {
@@ -141,7 +141,7 @@ public class RE implements REInterface {
             base.addTransition(nfa.getName(), 'e', nfaState.getName());
         }
 
-        String state = Integer.toString(stateCount++);
+        String state = Integer.toString(numStates++);
         base.addStartState(state);
         base.addFinalState(state);
         base.addTransition(state, 'e', nfaState.getName());
@@ -157,10 +157,10 @@ public class RE implements REInterface {
     public NFA primitive(char c) {
         NFA nfa = new NFA();
 
-        String startState = Integer.toString(stateCount++);
+        String startState = Integer.toString(numStates++);
         nfa.addStartState(startState);
 
-        String finalState = Integer.toString(stateCount++);
+        String finalState = Integer.toString(numStates++);
         nfa.addFinalState(finalState);
 
         nfa.addTransition(startState, c, finalState);
@@ -199,9 +199,9 @@ public class RE implements REInterface {
         nfa.addNFAStates(nfa2.getStates());
         nfa.addAbc(nfa2.getABC());
 
-        String startState = Integer.toString(stateCount++);
+        String startState = Integer.toString(numStates++);
         nfa.addStartState(startState);
-        String finalState = Integer.toString(stateCount++);
+        String finalState = Integer.toString(numStates++);
         nfa.addFinalState(finalState);
 
         nfa.addTransition(startState, 'e', nfaState.getName());
