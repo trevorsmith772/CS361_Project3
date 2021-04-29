@@ -22,11 +22,17 @@ java -cp ".:./CS361FA.jar" re.REDriver <input file>
 
 ## Discussion
 
-This project overall was not too bad. I would say that implementing the search algorithms is where the most difficulty came from. Most of the project went very smoothly without any problems, but we had few issues that took more time to solve which are outlined below:
+This project overall was not too bad. Most of the project went very smoothly without any problems, but we had few issues that took more time to solve which are outlined below:
 
-As expected, the getDFA() method presented the most issues. Having familiarity with DFS and BFS searches from CS 221 helped a lot when implementing this method and the search() method for eclosure(). Most of the trouble with these two methods came from design, where we struggled to figure out how to even structure these methods. To figure out how these methods would work, we basically referred to previous homework assignments and outlined the steps on paper to convert an NFA to DFA and the process for finding eclosure. Writing this out on paper helped as we could then kind of convert those steps into code. Upon completing the two searches, we still had some bugs that took us a while to solve as we were thinking they existed within our search algorithm, but they were actually in much simpler methods that required simple fixes. Because of this, I wish we had developed another driver class for unit testing to ensure our smaller methods were working correctly. This would have made developing the search methods much easier as well, since we wouldn't have been trying to fix bugs that we thought were in a different location. 
+We would say that initially working with the jar files were a bit conusing as it looked like we always had errors.  
 
-Overall though, we thought this project wasn't as bad as we were expecting, but it still presented challenges. As stated before, having familiarity with searches from the Circuit Tracer project in CS 221 helped a lot, as that program included similar concepts.
+We struggled to figure out how to initially implement these methods we were given from the link. While it made some sense conceptually, it wasn't totally obvious how it would all work together when
+
+we were writing the methods. To figure out how these methods would work, we basically referred to previous homework assignments and used the provided link to make it clearer to us.  
+
+Writing this out on paper helped as we could then kind of convert those steps into code.
+
+Overall though, we thought this project wasn't as bad as we were expecting, but it still presented challenges.
 
 ## Testing
 
