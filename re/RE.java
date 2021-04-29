@@ -9,6 +9,7 @@ public class RE implements REInterface {
     private String regEx;
     private int stateCount;
 
+
     public RE(String regEx) {
         this.regEx = regEx;
         stateCount = 0;
@@ -121,6 +122,12 @@ public class RE implements REInterface {
         return base;
     }
 
+    /**
+     * Creates an NFA from a given symbol
+     * 
+     * @param c - the given symbol
+     * @return the result NFA
+     */
     public NFA primitive(char c) {
         NFA nfa = new NFA();
 
@@ -135,6 +142,13 @@ public class RE implements REInterface {
         return nfa;
     }
 
+    /**
+     * Concatenates two NFAs
+     * 
+     * @param nfa - one NFA in operation
+     * @param nfa2 - second NFA in operation
+     * @return the concatenated result NFA
+     */
     public NFA concatenate(NFA nfa, NFA nfa2) {
         nfa.addAbc(nfa2.getABC());
         for (State s : nfa.getFinalStates()) {
@@ -146,6 +160,12 @@ public class RE implements REInterface {
         return nfa;
     }
 
+    /**
+     * Performs a union of two NFAs and returns the result
+     * @param nfa - first NFA in union
+     * @param nfa2 - second NFA in union
+     * @return an NFA resulted from the union operation
+     */
     public NFA union(NFA nfa, NFA nfa2) {
         NFAState nfaState = (NFAState) nfa.getStartState();
         NFAState nfaState2 = (NFAState) nfa2.getStartState();
