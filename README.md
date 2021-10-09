@@ -15,9 +15,9 @@ In order to compile this program, make sure you are in the parent directory cont
 
 javac -cp ".:./CS361FA.jar" re/REDriver.java
 
-Then to run the program, run the following command, where <input file> is the file (and filepath) that the program will run.
+Then to run the program, run the following command, where \<input file> is the file (and filepath) that the program will run.
 
-java -cp ".:./CS361FA.jar" re.REDriver <input file>
+java -cp ".:./CS361FA.jar" re.REDriver \<input file>
 
 
 ## Discussion
